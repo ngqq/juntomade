@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Junto Made</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #000;
+    background-color: #fff;
+    line-height: 1.5;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* Bullet journal dotted background */
+  .dot-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+    background-image: radial-gradient(circle, #d1d5db 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .container {
+    max-width: 80rem; /* max-w-7xl */
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ---------- Navigation ---------- */
+  nav {
+    width: 100%;
+    padding: 1.5rem 2rem;
+  }
+
+  nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    font-size: 0.875rem;
+  }
+
+  .nav-links a,
+  .contact-card a {
+    color: inherit;
+    transition: opacity 0.15s ease;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+  }
+
+  .nav-links a:hover {
+    opacity: 0.7;
+  }
+
+  /* ---------- Sections ---------- */
+  section {
+    max-width: 80rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2rem 2rem;
+  }
+
+  .hero {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  .hero-inner {
+    max-width: 56rem; /* max-w-4xl */
+  }
+
+  h1 {
+    font-family: 'Caveat', cursive;
+    font-size: 3.75rem; /* text-6xl */
+    font-weight: 500;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  h2 {
+    font-family: 'Caveat', cursive;
+    font-size: 2.25rem; /* text-4xl */
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+  }
+
+  /* Sticky-note style card */
+  .card {
+    background: #fff;
+    border: 2px solid #000;
+    padding: 1.5rem;
+    box-shadow: 8px 8px 0 0 rgba(0, 0, 0, 1);
+  }
+
+  .hero .card {
+    max-width: 42rem; /* max-w-2xl */
+  }
+
+  .card p,
+  .card li {
+    font-size: 1.125rem; /* text-lg */
+  }
+
+  .hero .card p {
+    font-size: 1.125rem;
+  }
+
+  /* Two-thirds column, alternating sides */
+  .col {
+    width: 100%;
+  }
+
+  /* Services list */
+  .services-list {
+    list-style: none;
+  }
+
+  .services-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .services-list li + li {
+    margin-top: 0.75rem;
+  }
+
+  .services-list .dot {
+    margin-top: 0.5rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: #000;
+    border-radius: 9999px;
+    flex-shrink: 0;
+  }
+
+  .services {
+    margin-bottom: 5rem;
+  }
+
+  /* ---------- My Work gallery ---------- */
+  .work-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .work-item {
+    background: #fff;
+    border: 2px solid #000;
+    box-shadow: 8px 8px 0 0 rgba(0, 0, 0, 1);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .work-item:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 10px 10px 0 0 rgba(0, 0, 0, 1);
+  }
+
+  .work-thumb {
+    aspect-ratio: 4 / 3;
+    border-bottom: 2px solid #000;
+    background-color: #f3f4f6;
+    background-image: radial-gradient(circle, #d1d5db 1px, transparent 1px);
+    background-size: 12px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* When real images replace placeholders:
+     <div class="work-thumb"><img src="..." alt="..."></div> */
+  .work-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .work-thumb span {
+    font-family: 'Caveat', cursive;
+    font-size: 1.5rem;
+    color: #9ca3af;
+  }
+
+  .work-item figcaption {
+    padding: 1rem 1.25rem;
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+
+  /* Contact */
+  .contact-card p + p {
+    margin-top: 1rem;
+  }
+
+  .contact-card a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .contact-card a:hover {
+    opacity: 0.7;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    width: 100%;
+    border-top: 2px solid #000;
+    background: #fff;
+    margin-top: 2rem;
+    padding: 1.5rem 2rem;
+  }
+
+  footer .container {
+    font-size: 0.875rem;
+    text-align: center;
+  }
+
+  /* ---------- Responsive (md: 768px) ---------- */
+  @media (min-width: 768px) {
+    .hero {
+      padding-top: 8rem;
+      padding-bottom: 8rem;
+    }
+
+    h1 {
+      font-size: 6rem; /* md:text-8xl */
+    }
+
+    h2 {
+      font-size: 3rem; /* md:text-5xl */
+    }
+
+    .card {
+      padding: 2rem;
+    }
+
+    .card p,
+    .hero .card p {
+      font-size: 1.25rem; /* hero md:text-xl */
+    }
+
+    .card p.text-lg,
+    .col .card p,
+    .col .card li {
+      font-size: 1.125rem;
+    }
+
+    .col {
+      width: 66.666667%; /* md:w-2/3 */
+    }
+
+    .col-right {
+      margin-left: auto;
+    }
+
+    .work-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+    }
+  }
+
+  @media (min-width: 640px) and (max-width: 767px) {
+    .work-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
+</head>
+<body>
+
+  <div class="dot-bg" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <div class="logo">JM</div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Junto Made</h1>
+      <div class="card">
+        <p>Your brand - made to stand out, convert, and look good doing it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="col col-right">
+      <h2>About me</h2>
+      <div class="card">
+        <p>Hi, I'm Angie. I build all things digital - websites, apps, even branding, from scratch.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- My Process -->
+  <section id="process">
+    <div class="col">
+      <h2>My Process</h2>
+      <div class="card">
+        <p>Are you sick of boring websites that follow the same layout? Don't worry, we don't use templates here. Everything is 100% customised and made to stand out.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- My Work -->
+  <section id="work">
+    <h2>My Work</h2>
+    <div class="work-grid">
+      <figure class="work-item">
+        <div class="work-thumb"><span><img src="https://awj7zdhuyqcbmwb3.public.blob.vercel-storage.com/eVouch-app.png"></span></div>
+        <figcaption>eVouch restaurant social sharing app, designed end-to-end from research to launch.</figcaption>
+      </figure>
+      <figure class="work-item">
+        <div class="work-thumb"><img src="https://awj7zdhuyqcbmwb3.public.blob.vercel-storage.com/kynology-preview.png"></div>
+        <figcaption>Event website for the world's #1 dog trainer and behaviourist, elevated brand visuals</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="services">
+    <div class="col">
+      <h2>Services</h2>
+      <div class="card">
+        <ul class="services-list">
+          <li><span class="dot"></span><span>Web Design</span></li>
+          <li><span class="dot"></span><span>Brand Identity</span></li>
+          <li><span class="dot"></span><span>App Development</span></li>
+          <li><span class="dot"></span><span>Digital Strategy</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="col col-right">
+      <h2>Work with Me</h2>
+      <div class="card contact-card">
+        <p>Big ideas? No ideas? I work with briefs of all complexities - and I can help you clarify them.</p>
+        <p>Shoot me a message at <a href="mailto:juntomade@gmail.com">juntomade@gmail.com</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      © Junto Made 2026 | Designed and built by Yours Truly
+    </div>
+  </footer>
+
+</body>
+</html>
